@@ -8,4 +8,8 @@ export const config = {
   mqttPort: parseInt(process.env.mqttPort),
   userName: process.env.userName,
   password: process.env.password,
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
+  region: process.env.region,
+  bucketName: process.env.bucketName,
 };
