@@ -5,4 +5,8 @@ dotenv.config();
 
 export const config = {
   port: parseInt(process.env.PORT),
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
+  region: process.env.region,
+  bucketName: process.env.bucketName,
 };
