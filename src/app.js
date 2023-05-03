@@ -3,8 +3,9 @@ import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
 import testController from "./test/test.controller.js";
-import { config } from "../config.js";
 import miseController from "./mise/miseController.js";
+import { connectMQTT } from "./mqtt/connect.js";
+import { config } from "../config.js";
 
 const app = express();
 
@@ -25,4 +26,5 @@ app.use((err, req, res, next) => {
   res.sendStatus(500);
 });
 
+connectMQTT();
 app.listen(config.port);
