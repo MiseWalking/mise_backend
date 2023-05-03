@@ -2,7 +2,7 @@ import mqtt from "mqtt";
 import { config } from "../../config.js";
 
 export async function connectMQTT() {
-  var client = mqtt.connect(config.mqttHost, {
+  const client = mqtt.connect(config.mqttHost, {
     host: config.localHost,
     port: config.mqttPort,
     protocol: "mqtt",
