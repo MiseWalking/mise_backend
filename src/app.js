@@ -2,9 +2,11 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
+import miseController from "./mise/miseController.js";
 import tweetController from "./test/test.controller.js";
 import imageController from "./image/image.controller.js";
 import miseController from "./mise/miseController.js";
+import { connectMQTT } from "./mqtt/connect.js";
 import { config } from "../config.js";
 
 const app = express();
@@ -27,4 +29,5 @@ app.use((err, req, res, next) => {
   res.sendStatus(500);
 });
 
+connectMQTT();
 app.listen(config.port);
