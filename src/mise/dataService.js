@@ -1,29 +1,40 @@
 import axios from "axios";
 import { config } from "../../config.js";
 
+// 미세먼지 정보 조회
+/**
+ * @swagger
+ *
+ * /data/mise:
+ *   get:
+ *     tags:
+ *      - 공공 데이터
+ *     summary: 미세먼지 정보 조회
+ *     parameters:
+ *       - in: query
+ *         name: gu
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: 조회하고자 하는 구 이름
+ *     responses:
+ *       200:
+ *         description: 미세먼지 정보 조회 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 gu:
+ *                   type: string
+ *                   description: 구 이름
+ *                 pm10:
+ *                   type: string
+ *                   description: 미세먼지(PM10) 농도
+ *       500:
+ *         description: 미세먼지 정보 조회 실패
+ */
 export const getMise = async (req, res) => {
-  const url =
-    "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth";
-  const serviceKey =
-    "yCFGi/AdePeartwnSyutSDnXXjxxtEbyJl+pEL5UbXWo44mWh/hro79GeWq4L/WGR3wlcdSO4ubOIOAShWjuAQ==";
-  const queryParams = new URLSearchParams({
-    serviceKey,
-    returnType: "json",
-    numOfRows: "1",
-    pageNo: "1",
-    searchDate: "2023-05-01",
-    InformCode: "PM10",
-  }).toString();
-
-  try {
-    const response = await axios.get(`${url}?${queryParams}`);
-    res.json(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const getMise2 = async (req, res) => {
   const key = config.seoulKey;
   const { gu } = req.query;
   const url = `http://openAPI.seoul.go.kr:8088/${key}/json/ListAirQualityByDistrictService/1/5/${gu}`;
@@ -39,6 +50,36 @@ export const getMise2 = async (req, res) => {
   }
 };
 
+// 기온 정보 조회
+/**
+ * @swagger
+ *
+ * /data/weather:
+ *   get:
+ *     tags:
+ *      - 공공 데이터
+ *     summary: 날씨 정보 조회
+ *     parameters:
+ *       - in: query
+ *         name: date
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: 조회하고자 하는 기준 날짜(yyyyMMdd)
+ *     responses:
+ *       200:
+ *         description: 기온 정보 조회 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 TMP:
+ *                   type: string
+ *                   description: 기온 정보
+ *       500:
+ *         description: 기온 정보 조회 실패
+ */
 export const getWeather = async (req, res) => {
   const { date } = req.query;
   const queryParams = new URLSearchParams({
@@ -72,6 +113,42 @@ export const getWeather = async (req, res) => {
   }
 };
 
+// 강수량 조회
+/**
+ * @swagger
+ *
+ * /data/gang:
+ *   get:
+ *     tags:
+ *      - 공공 데이터
+ *     summary: 강수량 정보 조회
+ *     parameters:
+ *       - in: query
+ *         name: date
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: 조회하고자 하는 기준 날짜(yyyyMMdd)
+ *     responses:
+ *       200:
+ *         description: 강수량 정보 조회 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 POP:
+ *                   type: string
+ *                   description: 강수 확률
+ *                 REH:
+ *                   type: string
+ *                   description: 습도
+ *                 PCP:
+ *                   type: string
+ *                   description: 강수량
+ *       500:
+ *         description: 강수량 정보 조회 실패
+ */
 export const getGang = async (req, res) => {
   const { date } = req.query;
   const queryParams = new URLSearchParams({
