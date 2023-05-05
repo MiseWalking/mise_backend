@@ -12,4 +12,5 @@ export const config = {
   secretAccessKey: process.env.secretAccessKey,
   region: process.env.region,
   bucketName: process.env.bucketName,
+  seoulKey: process.env.SEOUL_KEY,
 };
