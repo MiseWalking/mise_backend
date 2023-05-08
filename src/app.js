@@ -2,8 +2,6 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
-import tweetController from "./test/test.controller.js";
-import imageController from "./image/image.controller.js";
 import { connectMQTT } from "./mqtt/connect.js";
 import { config } from "../config.js";
 import dataController from "./mise/dataController.js";
@@ -51,8 +49,6 @@ app.use(
   })
 );
 
-app.use("/test", tweetController);
-app.use("/image", imageController);
 app.use("/data", dataController);
 
 app.use((req, res, next) => {
