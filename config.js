@@ -14,4 +14,5 @@ export const config = {
   bucketName: process.env.bucketName,
   seoulKey: process.env.SEOUL_KEY,
   weatherKey: process.env.WEATHER_KEY,
+  dbHost: process.env.DB_HOST,
 };
