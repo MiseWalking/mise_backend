@@ -8,6 +8,7 @@ import dataController from "./mise/dataController.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { connectDB } from "./db/database.js";
+import userController from "./user/user.controller.js";
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.use(
 );
 
 app.use("/data", dataController);
+app.use("/user", userController);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
@@ -62,8 +64,9 @@ app.use((err, req, res, next) => {
 });
 
 connectDB().then(() => {
-  console.log("init");
+  console.log("MongoDB Connected");
   connectMQTT().then(() => {
+    console.log("MQTT Connected");
     app.listen(config.port);
   });
 });
