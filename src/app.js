@@ -7,6 +7,7 @@ import { config } from "../config.js";
 import dataController from "./mise/dataController.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import { connectDB } from "./db/database.js";
 
 const app = express();
 
@@ -60,5 +61,9 @@ app.use((err, req, res, next) => {
   res.sendStatus(500);
 });
 
-connectMQTT();
-app.listen(config.port);
+connectDB().then(() => {
+  console.log("init");
+  connectMQTT().then(() => {
+    app.listen(config.port);
+  });
+});
