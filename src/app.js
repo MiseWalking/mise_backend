@@ -9,6 +9,7 @@ import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { connectDB } from "./db/database.js";
 import userController from "./user/user.controller.js";
+import fitbitController from "./fitbit/connect.js";
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use(
 
 app.use("/data", dataController);
 app.use("/user", userController);
+app.use("/fitbit", fitbitController);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

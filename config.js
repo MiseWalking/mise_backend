@@ -15,4 +15,6 @@ export const config = {
   seoulKey: process.env.SEOUL_KEY,
   weatherKey: process.env.WEATHER_KEY,
   dbHost: process.env.DB_HOST,
+  fitbitClId: process.env.FITBIT_CLID,
+  fitbitSecret: process.env.FITBIT_SECID,
 };
