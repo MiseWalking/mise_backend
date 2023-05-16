@@ -13,14 +13,17 @@ fitbitController.get("/authorize", (req, res) => {
   res.redirect(
     client.getAuthorizeUrl(
       "activity heartrate location nutrition profile settings sleep social weight",
-      "http://localhost:5000/fitbit/callback"
+      "http://" + config.ec2_host + ":5000/fitbit/callback"
     )
   );
 });
 
 fitbitController.get("/callback", async (req, res) => {
   await client
-    .getAccessToken(req.query.code, "http://localhost:5000/fitbit/callback")
+    .getAccessToken(
+      req.query.code,
+      "http://" + config.ec2_host + ":5000/fitbit/callback"
+    )
     .then((result) => {
       client
         .get("/profile.json", result.access_token)
