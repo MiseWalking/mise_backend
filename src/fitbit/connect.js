@@ -28,7 +28,13 @@ fitbitController.get("/callback", async (req, res) => {
       client
         .get("/profile.json", result.access_token)
         .then((results) => {
-          res.send(results[0]);
+          req.session.authorized = false;
+          req.session.access_token = null;
+          req.session.save();
+          res.json({
+            access_token: result.access_token,
+            encodedUserId: results[0].user.encodedId,
+          });
         })
         .catch((err) => {
           res.status(err.status).send(err);

@@ -10,8 +10,11 @@ import swaggerUi from "swagger-ui-express";
 import { connectDB } from "./db/database.js";
 import userController from "./user/user.controller.js";
 import fitbitController from "./fitbit/connect.js";
+import session from "express-session";
+import sessionFileStore from "session-file-store";
 
 const app = express();
+const FileStore = sessionFileStore(session);
 
 app.use(express.json());
 app.use(morgan("dev"));
@@ -49,6 +52,16 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(swaggerSpec, {
     explorer: true,
+  })
+);
+
+//session 설정
+app.use(
+  session({
+    secret: "testSession",
+    resave: false,
+    saveUninitialized: true,
+    store: new FileStore(),
   })
 );
 
