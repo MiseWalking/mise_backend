@@ -4,6 +4,10 @@ import { useVirtualId } from "../db/database.js";
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
+  age: { type: Number, required: true },
+  gender: { type: String, required: true },
+  height: { type: Number, required: true },
+  objective: { type: Number, required: true },
   url: String,
 });
 
