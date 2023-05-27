@@ -23,3 +23,17 @@ export async function createUser(user) {
   await newUser.save();
   return newUser.id;
 }
+
+export async function createUserInfo(userInfo) {
+  const { username, name, age, gender, height, objective } = userInfo;
+
+  const user = await User.findOne({ username });
+
+  user.name = name;
+  user.age = age;
+  user.gender = gender;
+  user.height = height;
+  user.objective = objective;
+
+  await user.save();
+}
