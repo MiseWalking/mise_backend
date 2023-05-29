@@ -11,11 +11,9 @@ export async function signup(req, res) {
       .json({ success: false, message: "The username is already taken" });
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-
   await userRepository.createUser({
     username,
-    password: hashedPassword,
+    password,
     name,
     email,
     url,
