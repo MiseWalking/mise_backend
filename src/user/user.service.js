@@ -265,6 +265,59 @@ export async function createUserInfo(req, res) {
   }
 }
 
+/**
+ * @swagger
+ *
+ * /user-info/{username}:
+ *   get:
+ *     tags:
+ *      - User
+ *     summary: Get user information
+ *     parameters:
+ *       - in: path
+ *         name: username
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Username of the user
+ *     responses:
+ *       200:
+ *         description: User information retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   default: true
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   default: false
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   default: false
+ *                 message:
+ *                   type: string
+ */
 export async function getUserInfo(req, res) {
   try {
     const { username } = req.params;
@@ -284,6 +337,76 @@ export async function getUserInfo(req, res) {
   }
 }
 
+/**
+ * @swagger
+ *
+ * /user-info/{username}:
+ *   put:
+ *     tags:
+ *      - User
+ *     summary: Update user information
+ *     parameters:
+ *       - in: path
+ *         name: username
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Username of the user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               age:
+ *                 type: number
+ *               gender:
+ *                 type: string
+ *               height:
+ *                 type: number
+ *               objective:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: User information updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   default: true
+ *                 message:
+ *                   type: string
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   default: false
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   default: false
+ *                 message:
+ *                   type: string
+ */
 export async function updateUserInfo(req, res) {
   try {
     const { username } = req.params;
