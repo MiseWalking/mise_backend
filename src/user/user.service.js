@@ -283,3 +283,34 @@ export async function getUserInfo(req, res) {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 }
+
+export async function updateUserInfo(req, res) {
+  try {
+    const { username } = req.params;
+    const { name, age, gender, height, objective } = req.body;
+
+    const user = await userRepository.findByUsername(username);
+
+    // 인증 체크
+    if (!user) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    // 유저 정보 업데이트
+    user.name = name || user.name;
+    user.age = age || user.age;
+    user.gender = gender || user.gender;
+    user.height = height || user.height;
+    user.objective = objective || user.objective;
+
+    await user.save();
+
+    // 응답 반환
+    res
+      .status(200)
+      .json({ success: true, message: "User information updated" });
+  } catch (error) {
+    console.error("Error updating user information:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}
