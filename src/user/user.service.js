@@ -3,7 +3,7 @@ import * as userRepository from "./user.repository.js";
 /**
  * @swagger
  *
- * /signup:
+ * /user/signup:
  *   post:
  *     tags:
  *      - User
@@ -81,7 +81,7 @@ export async function signup(req, res) {
 /**
  * @swagger
  *
- * /login:
+ * /user/login:
  *   post:
  *     tags:
  *      - User
@@ -149,7 +149,7 @@ export async function login(req, res) {
 /**
  * @swagger
  *
- * /user-info:
+ * /user:
  *   post:
  *     tags:
  *      - User
@@ -268,11 +268,12 @@ export async function createUserInfo(req, res) {
 /**
  * @swagger
  *
- * /user-info/{username}:
+ * /user/{username}:
  *   get:
  *     tags:
  *      - User
  *     summary: Get user information
+ *     description: Retrieve user information by username.
  *     parameters:
  *       - in: path
  *         name: username
@@ -317,6 +318,24 @@ export async function createUserInfo(req, res) {
  *                   default: false
  *                 message:
  *                   type: string
+ *
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         username:
+ *           type: string
+ *         name:
+ *           type: string
+ *         age:
+ *           type: number
+ *         gender:
+ *           type: string
+ *         height:
+ *           type: number
+ *         objective:
+ *           type: string
  */
 export async function getUserInfo(req, res) {
   try {
@@ -340,7 +359,7 @@ export async function getUserInfo(req, res) {
 /**
  * @swagger
  *
- * /user-info/{username}:
+ * /user/{username}:
  *   put:
  *     tags:
  *      - User
