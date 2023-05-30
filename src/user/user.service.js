@@ -264,3 +264,22 @@ export async function createUserInfo(req, res) {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 }
+
+export async function getUserInfo(req, res) {
+  try {
+    const { username } = req.params;
+
+    const user = await userRepository.findByUsername(username);
+
+    // 인증 체크
+    if (!user) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    // 유저 정보 반환
+    res.status(200).json({ success: true, user });
+  } catch (error) {
+    console.error("Error retrieving user information:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+}
