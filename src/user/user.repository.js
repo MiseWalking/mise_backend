@@ -18,6 +18,10 @@ export async function findByUsername(username) {
   return User.findOne({ username });
 }
 
+export async function findById(userId) {
+  return User.findById(userId);
+}
+
 export async function createUser(user) {
   const newUser = new User(user);
   await newUser.save();

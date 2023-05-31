@@ -75,7 +75,7 @@ export async function signup(req, res) {
     url,
   });
 
-  res.status(201).json({ message: "Signup successful" });
+  res.status(201).json({ success: true, message: "Signup successful" });
 }
 
 /**
