@@ -19,5 +19,8 @@ const validateLogin = [
 
 userController.post("/signup", validateSignup, userService.signup);
 userController.post("/login", validateLogin, userService.login);
+userController.post("/", userService.createUserInfo);
+userController.get("/:username", userService.getUserInfo);
+userController.put("/:username", userService.updateUserInfo);
 
 export default userController;
