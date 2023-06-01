@@ -57,6 +57,7 @@ app.use("/data", dataController);
 app.use("/user", userController);
 app.use("/fitbit", fitbitController);
 app.use("/weight", weightController);
+app.use("/ras");
 
 app.use((req, res, next) => {
   res.sendStatus(404);
