@@ -47,8 +47,6 @@ fitbitController.get("/userInfo", async (req, res) => {
     });
 });
 
-//주기적으로 가져와야하는데 too many request에러 남
-//fat, weight 정보 날짜 기준으로 가져온다
 fitbitController.get("/fatInfo", async (req, res) => {
   const accessToken = await getAccessToken();
   const fatInfo = await fitbitClient.get(
@@ -69,7 +67,7 @@ fitbitController.get("/dailyActivity", async (req, res) => {
   const accessToken = await getAccessToken();
   let resJson = {};
   fitbitClient
-    .get("/activities/date/2023-05-12.json", accessToken)
+    .get("/activities/date/2023-05-22.json", accessToken)
     .then((results) => {
       resJson.activities = results[0];
       res.json(resJson);
@@ -78,6 +76,24 @@ fitbitController.get("/dailyActivity", async (req, res) => {
       res.status(err.status).send(err);
     });
 });
+
+fitbitController.get("/getActivityLogList", async (req, res) => {
+  const accessToken = await getAccessToken();
+  let resJson = {};
+  fitbitClient
+    .get(
+      "/activities/list.json?afterDate=2023-05-01&sort=asc&offset=0&limit=2",
+      accessToken
+    )
+    .then((results) => {
+      resJson.activities = results[0];
+      res.json(resJson);
+    })
+    .catch((err) => {
+      res.status(err.status).send(err);
+    });
+});
+//https://dev.fitbit.com/build/reference/web-api/activity/get-activity-tcx/ 위에서 가져와서 로그로 검색
 
 async function getAccessToken() {
   const redisClient = Redis.createClient(6379, "localhost");
