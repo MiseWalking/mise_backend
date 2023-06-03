@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
   gender: { type: String, required: true },
   height: { type: Number, required: true },
   objective: { type: Number, required: true },
-  url: String,
 });
 
 useVirtualId(userSchema);

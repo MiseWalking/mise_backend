@@ -11,6 +11,8 @@ import { connectDB } from "./db/database.js";
 import userController from "./user/user.controller.js";
 import fitbitController from "./fitbit/connect.js";
 import weightController from "./weight/weight.controller.js";
+import raspberryController from "./raspberry/raspberry.controller.js";
+import routeController from "./route/route.controller.js";
 
 const app = express();
 
@@ -61,6 +63,8 @@ app.use("/data", dataController);
 app.use("/user", userController);
 app.use("/fitbit", fitbitController);
 app.use("/weight", weightController);
+app.use("/ras", raspberryController);
+app.use("/route", routeController);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
