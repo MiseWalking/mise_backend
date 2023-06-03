@@ -70,9 +70,6 @@ export async function signup(req, res) {
   await userRepository.createUser({
     username,
     password,
-    name,
-    email,
-    url,
   });
 
   res.status(201).json({ success: true, message: "Signup successful" });
