@@ -12,11 +12,12 @@ export const getRas = async (req, res) => {
   });
 
   device.on("connect", function () {
+    console.log("connect");
     device.subscribe("sensor");
   });
 
   device.on("message", function (topic, payload) {
-    console.log("들어옴");
     console.log("message", topic, payload.toString());
+    return res.status(200).send(payload.toString());
   });
 };
