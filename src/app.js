@@ -80,5 +80,5 @@ connectDB().then(() => {
   connectMQTT().then(() => {
     console.log("MQTT Connected");
     const server = app.listen(config.port);
-
+  });
 });
