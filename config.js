@@ -17,5 +17,5 @@ export const config = {
   dbHost: process.env.DB_HOST,
   fitbitClId: process.env.FITBIT_CLID,
   fitbitSecret: process.env.FITBIT_SECID,
-  ec2_host: process.env.ec2_host,
+  fitbitUrl: process.env.FITBIT_URL,
 };

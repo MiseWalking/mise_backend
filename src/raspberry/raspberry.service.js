@@ -18,5 +18,6 @@ export const getRas = async (req, res) => {
 
   device.on("message", function (topic, payload) {
     console.log("message", topic, payload.toString());
+    return res.status(200).send(payload.toString());
   });
 };

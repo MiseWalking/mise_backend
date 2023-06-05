@@ -19,9 +19,21 @@ import * as userRepository from "./user.repository.js";
  *                 type: string
  *               password:
  *                 type: string
+ *               age:
+ *                 type: number
+ *               gender:
+ *                 type: string
+ *               height:
+ *                 type: number
+ *               objective:
+ *                 type: number
  *             required:
  *               - username
  *               - password
+ *               - age
+ *               - gender
+ *               - height
+ *               - objective
  *     responses:
  *       201:
  *         description: Signup successful
@@ -58,7 +70,8 @@ import * as userRepository from "./user.repository.js";
  *                   type: string
  */
 export async function signup(req, res) {
-  const { username, password } = req.body;
+  console.log(req.method, req.path);
+  const { username, password, age, gender, height, objective } = req.body;
 
   const isUsernameTaken = await userRepository.findByUsername(username);
   if (isUsernameTaken) {
@@ -70,6 +83,11 @@ export async function signup(req, res) {
   await userRepository.createUser({
     username,
     password,
+    name: username,
+    age,
+    gender,
+    height,
+    objective,
   });
 
   res.status(201).json({ success: true, message: "Signup successful" });
@@ -124,6 +142,8 @@ export async function signup(req, res) {
  *                   type: string
  */
 export async function login(req, res) {
+  console.log(req.method, req.path);
+
   const { username, password } = req.body;
 
   const user = await userRepository.findByUsername(username);
@@ -228,6 +248,8 @@ export async function login(req, res) {
  *                   type: string
  */
 export async function createUserInfo(req, res) {
+  console.log(req.method, req.path);
+
   try {
     const { username, name, age, gender, height, objective } = req.body;
 
@@ -335,6 +357,8 @@ export async function createUserInfo(req, res) {
  *           type: string
  */
 export async function getUserInfo(req, res) {
+  console.log(req.method, req.path);
+
   try {
     const { username } = req.params;
 
@@ -424,6 +448,8 @@ export async function getUserInfo(req, res) {
  *                   type: string
  */
 export async function updateUserInfo(req, res) {
+  console.log(req.method, req.path);
+
   try {
     const { username } = req.params;
     const { name, age, gender, height, objective } = req.body;

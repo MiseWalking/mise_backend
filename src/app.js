@@ -19,7 +19,11 @@ const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(helmet());
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 const swaggerDefinition = {
   openapi: "3.0.0",
@@ -75,6 +79,6 @@ connectDB().then(() => {
   console.log("MongoDB Connected");
   connectMQTT().then(() => {
     console.log("MQTT Connected");
-    app.listen(config.port);
-  });
+    const server = app.listen(config.port);
+
 });
